@@ -1,0 +1,30 @@
+[DIR]
+exp_dir = ../../Experiment
+stimuli_dir = ../../Images
+
+
+[EXP]
+stimulus_duration = 2
+stimulus_blank = 1
+study_question_duration = 5
+test_stimulus_duration = 1
+test_question1_duration = 5
+test_question2_duration = 5
+break_duration = 5
+key_list = 0, 1
+confidence_keys = 0, 1, 2
+pre_exp_time = 5
+post_exp_time = 5
+exp_mode = True
+scale = 1.5
+test_screen_width = 800
+test_screen_height = 600
+exp_screen_width = 1920
+exp_screen_height = 1080
+
+; 字符参数
+font_name = Arial Unicode MS
+; 非Mac可尝试：
+; font_name = MS Gothic
+; font_name = SimHei
+
