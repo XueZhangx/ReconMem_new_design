@@ -298,13 +298,13 @@ def run_test_part(test_sequence):
 
     # 自信度选项文本
     confidence_labels = [
-        visual.TextStim(win, text="←", color='white', pos=(-0.4, -0.8), font=font_name),
-        visual.TextStim(win, text="↓", color='white', pos=(0, -0.8), font=font_name),
-        visual.TextStim(win, text="→", color='white', pos=(0.4, -0.8), font=font_name),
+        visual.TextStim(win, text="1", color='white', pos=(-0.4, -0.8), font=font_name),
+        visual.TextStim(win, text="2", color='white', pos=(0, -0.8), font=font_name),
+        visual.TextStim(win, text="3", color='white', pos=(0.4, -0.8), font=font_name),
     ]
 
     # 修改按键列表为方向键
-    confidence_keys = ['left', 'down', 'right']
+    confidence_keys = ['1', '2', '3']
 
     # 记录变量（保持不变）
     test_onset_times = np.ones((len(test_stimuli), 1)) * np.nan
@@ -385,11 +385,13 @@ def run_test_part(test_sequence):
 
             win.flip()
 
-            keys = event.getKeys(keyList=confidence_keys, timeStamped=stimulus_clock)  # 使用confidence_keys
-            if keys:
-                # 将方向键映射为数字
-                key_mapping = {'left': '0', 'down': '1', 'right': '2'}
-                test_responses_q2[trial_count] = key_mapping[keys[0][0]]
+            keys = event.getKeys(keyList=confidence_keys + ['escape'], timeStamped=stimulus_clock)  # 使用数字键
+            if 'escape' in [key[0] for key in keys]:
+                win.close()
+                core.quit()
+
+            if keys and keys[0][0] != 'escape':
+                test_responses_q2[trial_count] = keys[0][0]
                 test_RTs_q2[trial_count] = keys[0][1] - question2_start
                 response_made = True
                 log_file.write(
